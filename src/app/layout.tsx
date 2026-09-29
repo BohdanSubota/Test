@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Figtree } from "next/font/google";
 import "./globals.css";
+import { TRPCProvider } from "@/trpc/Provider";
 
 const figtree = Figtree({
   variable: "--font-figtree",
@@ -20,7 +21,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${figtree.variable} antialiased bg-white text-ink font-sans`}>
-        {children}
+        <TRPCProvider>
+          {children}
+        </TRPCProvider>
       </body>
     </html>
   );
