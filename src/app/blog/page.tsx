@@ -1,9 +1,27 @@
+import { NewsletterForm } from "@/components/NewsletterForm";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/Button";
 import { PostCard } from "@/components/PostCard";
+import { serverTrpc } from "@/trpc/server";
+import Link from "next/link";
 
-export default function Blog() {
+export default async function Blog({
+  searchParams,
+}: {
+  searchParams: Promise<{ category?: string; page?: string }>
+}) {
+  const { category: rawCategory, page: pageParam } = await searchParams;
+  const currentPage = pageParam ? parseInt(pageParam) : 1;
+  const category = rawCategory ? decodeURIComponent(rawCategory) : undefined;
+  const { featured, posts, totalPages } = await serverTrpc.blog.getAll({ category, page: currentPage });
+  const categories = ["All posts", "Personal injury", "Lemon law", "Workers' comp", "Firm news"];
+
+  const getPageLink = (pageNum: number) => {
+    if (pageNum === 1) return category ? `/blog?category=${encodeURIComponent(category)}` : "/blog";
+    return category ? `/blog?category=${encodeURIComponent(category)}&page=${pageNum}` : `/blog?page=${pageNum}`;
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <Header />
@@ -15,23 +33,27 @@ export default function Blog() {
             <div>
               <h1 className="text-[36px] lg:text-[56px] leading-[1.15] lg:leading-[1.1] font-semibold tracking-[-0.015em] text-ink mb-4">Blog</h1>
               <p className="text-[18px] lg:text-[20px] leading-[1.5] text-body-text mb-8">
-                Plain answers about injuries, lemon cars and workers&apos; comp in California. Written by our team in Victorville for people who want to know where they stand.
+                Plain answers about injuries, lemon cars and workers' comp in California. Written by our team in Victorville for people who want to know where they stand.
               </p>
 
               {/* Category chips */}
               <div className="flex flex-wrap gap-3">
-                {["All posts", "Personal injury", "Lemon law", "Workers' comp", "Firm news"].map((cat, i) => (
-                  <button
-                    key={cat}
-                    className={`px-4 py-2 rounded-lg border text-[16px] transition-colors ${
-                      i === 0
-                        ? 'bg-ink border-ink text-white font-semibold'
-                        : 'bg-white border-chip-border text-ink hover:bg-tint font-medium'
-                    }`}
-                  >
-                    {cat}
-                  </button>
-                ))}
+                {categories.map((cat, i) => {
+                  const isActive = category === cat || (!category && i === 0);
+                  return (
+                    <Link
+                      key={cat}
+                      href={i === 0 ? "/blog" : `/blog?category=${encodeURIComponent(cat)}`}
+                      className={`px-4 py-2 rounded-lg border text-[16px] transition-colors ${
+                        isActive
+                          ? 'bg-rk-green border-rk-green text-white font-semibold'
+                          : 'bg-white border-chip-border text-ink hover:bg-tint font-medium'
+                      }`}
+                    >
+                      {cat}
+                    </Link>
+                  );
+                })}
               </div>
             </div>
 
@@ -39,7 +61,9 @@ export default function Blog() {
             <div className="bg-tint rounded-lg p-6 lg:p-8 h-fit">
               <h3 className="text-[20px] font-semibold text-ink mb-3">Reading because something happened?</h3>
               <p className="text-[17px] text-body-text leading-[1.5] mb-6">Tell us about it. The review is free, and you pay nothing unless we win.</p>
-              <Button variant="secondary" size="lg" className="justify-center h-[48px] mb-6">Start your free review</Button>
+              <Link href="/contact" className="block w-full">
+                <Button variant="secondary" size="lg" className="w-full justify-center h-[48px] mb-6">Start your free review</Button>
+              </Link>
               <div className="flex items-center gap-2">
                 <div className="flex items-center justify-center w-5 h-5">
                   <svg viewBox="0 0 24 24" width="16" height="16" xmlns="http://www.w3.org/2000/svg">
@@ -62,79 +86,78 @@ export default function Blog() {
         </section>
 
         {/* Featured post */}
-        <section className="px-4 lg:px-11 py-10 lg:py-16 max-w-[1396px] mx-auto border-t border-divider">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
-            <div>
-              <img src="/images/img-1.png" alt="Car accident checklist" className="w-full rounded-[16px] object-cover aspect-[4/3]" />
+        {featured && (!category || category === 'All posts') && (
+          <section className="px-4 lg:px-11 py-10 lg:py-16 max-w-[1440px] mx-auto border-t border-divider">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center bg-tint rounded-[24px] p-6 lg:p-12">
+              <div>
+                <img src={featured.imageSrc} alt={featured.title} className="w-full rounded-[16px] object-cover aspect-[4/3]" />
+              </div>
+              <div>
+                <span className="text-[14px] font-semibold text-rk-green uppercase tracking-wider mb-3 block">{featured.category}</span>
+                <h2 className="text-[28px] lg:text-[36px] leading-[1.2] font-semibold text-ink mb-4">{featured.title}</h2>
+                <p className="text-[17px] text-body-text leading-[1.5] mb-6">
+                  {featured.description}
+                </p>
+                <div className="text-[15px] text-muted mb-4">{featured.date} · {featured.readTime}</div>
+                <Link href={`/blog/${featured.slug}`} className="text-[16px] font-semibold text-rk-green hover:underline">Read more</Link>
+              </div>
             </div>
-            <div>
-              <span className="text-[14px] font-semibold text-rk-green uppercase tracking-wider mb-3 block">Personal injury</span>
-              <h2 className="text-[28px] lg:text-[36px] leading-[1.2] font-semibold text-ink mb-4">What to do in the first 24 hours after a car accident in California</h2>
-              <p className="text-[17px] text-body-text leading-[1.5] mb-6">
-                See a doctor, take photos, and hold off on a recorded statement to the other driver&apos;s insurer. Here is a simple checklist for the first day, and why each step protects your claim.
-              </p>
-              <div className="text-[15px] text-muted mb-4">September 18, 2026 · 7 min read</div>
-              <a href="/blog/what-to-do-after-car-accident" className="text-[16px] font-semibold text-rk-green hover:underline">Read the checklist</a>
-            </div>
-          </div>
-        </section>
+          </section>
+        )}
 
         {/* Latest posts */}
         <section className="px-4 lg:px-11 py-10 lg:py-16 max-w-[1396px] mx-auto">
           <h2 className="text-[30px] lg:text-[40px] leading-[1.15] lg:leading-[46px] font-semibold text-ink mb-10 lg:mb-12">Latest posts</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <PostCard
-              imageSrc="/images/img-5.png"
-              category="Lemon law"
-              title="Is my car a lemon? The 30-day rule explained"
-              date="September 15, 2026"
-              readTime="6 min read"
-            />
-            <PostCard
-              imageSrc="/images/img-0.png"
-              category="Workers' comp"
-              title="Workers' comp claim denied? Here is what happens next"
-              date="September 9, 2026"
-              readTime="5 min read"
-            />
-            <PostCard
-              imageSrc="/images/img-3.png"
-              category="Personal injury"
-              title="Dog bite injuries in California: strict liability in plain English"
-              date="September 3, 2026"
-              readTime="4 min read"
-            />
-            <PostCard
-              imageSrc="/images/img-9.png"
-              category="Personal injury"
-              title="Uber accident: whose insurance pays?"
-              date="August 20, 2026"
-              readTime="5 min read"
-            />
-            <PostCard
-              imageSrc="/images/img-8.png"
-              category="Lemon law"
-              title="Used car lemon law: when a used car qualifies"
-              date="August 6, 2026"
-              readTime="6 min read"
-            />
-            <PostCard
-              imageSrc="/images/img-7.png"
-              category="Firm news"
-              title="Help with your case in Armenian: what to expect when you call"
-              date="June 24, 2026"
-              readTime="3 min read"
-            />
-          </div>
+          
+          {posts.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-x-8 gap-y-12">
+              {posts.map((post) => (
+                <Link key={post.slug} href={`/blog/${post.slug}`}>
+                  <PostCard
+                    imageSrc={post.imageSrc}
+                    category={post.category}
+                    title={post.title}
+                    description={post.description}
+                    date={post.date}
+                    readTime={post.readTime}
+                  />
+                </Link>
+              ))}
+            </div>
+          ) : (
+            <p className="text-body-text text-lg">No posts found in this category.</p>
+          )}
 
           {/* Pagination */}
+          {totalPages > 1 && (
           <div className="flex items-center gap-2 mt-12">
-            <button className="px-4 py-2 rounded-lg border border-chip-border text-[16px] font-medium text-ink hover:bg-tint">Previous</button>
-            <button className="w-10 h-10 rounded-lg bg-ink text-white text-[16px] font-semibold flex items-center justify-center">1</button>
-            <button className="w-10 h-10 rounded-lg border border-chip-border text-[16px] font-medium text-ink hover:bg-tint flex items-center justify-center">2</button>
-            <button className="w-10 h-10 rounded-lg border border-chip-border text-[16px] font-medium text-ink hover:bg-tint flex items-center justify-center">3</button>
-            <button className="px-4 py-2 rounded-lg border border-chip-border text-[16px] font-medium text-ink hover:bg-tint">Next</button>
+            {currentPage > 1 ? (
+              <Link href={getPageLink(currentPage - 1)} className="h-10 px-4 rounded-lg border border-chip-border text-[16px] font-medium text-ink hover:bg-tint flex items-center justify-center transition-colors">Previous</Link>
+            ) : (
+              <span className="h-10 px-4 rounded-lg border border-chip-border text-[16px] font-medium text-muted flex items-center justify-center opacity-50 cursor-not-allowed">Previous</span>
+            )}
+            
+            {Array.from({ length: totalPages }).map((_, i) => {
+              const pageNum = i + 1;
+              const isActive = pageNum === currentPage;
+              return (
+                <Link
+                  key={pageNum}
+                  href={getPageLink(pageNum)}
+                  className={`w-10 h-10 rounded-lg border flex items-center justify-center text-[16px] transition-colors ${isActive ? 'bg-rk-green border-rk-green text-white font-semibold' : 'border-chip-border text-ink hover:bg-tint font-medium'}`}
+                >
+                  {pageNum}
+                </Link>
+              );
+            })}
+
+            {currentPage < totalPages ? (
+              <Link href={getPageLink(currentPage + 1)} className="h-10 px-4 rounded-lg border border-chip-border text-[16px] font-medium text-ink hover:bg-tint flex items-center justify-center transition-colors">Next</Link>
+            ) : (
+              <span className="h-10 px-4 rounded-lg border border-chip-border text-[16px] font-medium text-muted flex items-center justify-center opacity-50 cursor-not-allowed">Next</span>
+            )}
           </div>
+        )}
         </section>
 
         {/* Newsletter */}
@@ -143,19 +166,10 @@ export default function Blog() {
             <div className="max-w-xl">
               <h2 className="text-[28px] lg:text-[32px] font-semibold text-ink mb-3 lg:mb-4">Know your rights, in plain language</h2>
               <p className="text-[17px] lg:text-[18px] text-body-text">
-                Short updates on California injury, lemon law and workers&apos; comp. Unsubscribe anytime.
+                Short updates on California injury, lemon law and workers' comp. Unsubscribe anytime.
               </p>
             </div>
-            <form className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto">
-              <input
-                type="email"
-                placeholder="Your email address"
-                className="w-full sm:w-[320px] border border-input-border rounded-sm px-4 py-3.5 text-[16px] text-ink focus:outline-none focus:border-rk-green bg-white"
-              />
-              <Button type="submit" size="lg" className="shrink-0 justify-center h-[52px]">
-                Subscribe
-              </Button>
-            </form>
+            <NewsletterForm className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto" />
           </div>
         </section>
 
@@ -171,7 +185,9 @@ export default function Blog() {
                 <img src="/icons/icon-phone.svg" alt="Phone" className="w-5 h-5 mr-2 brightness-0 invert" />
                 Call (760) 338-9712
               </Button>
-              <Button variant="secondary" size="lg" className="justify-center h-[52px]">Start your free review</Button>
+              <Link href="/contact">
+                <Button variant="secondary" size="lg" className="justify-center h-[52px]">Start your free review</Button>
+              </Link>
             </div>
           </div>
         </section>
