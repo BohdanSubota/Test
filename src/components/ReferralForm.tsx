@@ -4,30 +4,19 @@ import { useState } from "react";
 import { Button } from "./Button";
 import { trpc } from "@/trpc/client";
 
-export function LemonLawForm() {
-  const [happened, setHappened] = useState("Lemon car");
-  const [carKind, setCarKind] = useState("New");
-  const [when, setWhen] = useState("This week");
+export function ReferralForm() {
+  const [selectedChip, setSelectedChip] = useState("Immigration");
   const [name, setName] = useState("");
   const [phone, setPhone] = useState("");
-  const [note, setNote] = useState("");
   const [error, setError] = useState<string | null>(null);
   
   const submitMutation = trpc.contact.submit.useMutation();
   const [isSuccess, setIsSuccess] = useState(false);
   const [submittedData, setSubmittedData] = useState<any>(null);
 
-  const happenedOptions = [
-    "Car accident", "Motorcycle", "Truck", "Uber or Lyft", "Hurt at work", 
-    "Pedestrian", "Dog bite", "Slip and fall", "Lemon car", "Something else"
-  ];
-  
-  const carKindOptions = [
-    "New", "Used under warranty", "Leased"
-  ];
-
-  const whenOptions = [
-    "This week", "This month", "This year", "Over a year ago"
+  const chipOptions = [
+    "Immigration", "Employment", "DUI", "Criminal defense", "Divorce",
+    "Family law", "Business", "Litigation", "Estate planning, wills and trusts", "Something else"
   ];
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -44,18 +33,14 @@ export function LemonLawForm() {
     submitMutation.mutate({
       name,
       phone,
-      happened,
-      when,
-      note: `Car Kind: ${carKind}. ${note}`,
+      happened: selectedChip,
+      note: "Referral Request",
     }, {
       onSuccess: () => {
         setSubmittedData({
           name,
           phone,
-          happened,
-          carKind,
-          when,
-          note
+          happened: selectedChip,
         });
         setIsSuccess(true);
       },
@@ -85,10 +70,10 @@ export function LemonLawForm() {
         </div>
         
         <h2 className="text-[36px] lg:text-[44px] font-semibold text-ink leading-[1.1] tracking-[-0.01em] mb-4">
-          Thanks, {firstName}. We've got your case.
+          Thanks, {firstName}. We've got your request.
         </h2>
         <p className="text-[18px] lg:text-[20px] text-body-text leading-[1.5] mb-10">
-          We'll call you at {submittedData.phone} to talk through what happened. The review is free, and there's nothing to sign on this call.
+          We'll call you at {submittedData.phone} to talk through what you need. We'll suggest a firm we trust.
         </p>
 
         <div className="bg-tint rounded-lg p-6 lg:p-10 mb-10 border border-transparent">
@@ -96,16 +81,8 @@ export function LemonLawForm() {
           
           <div className="space-y-6">
             <div className="grid grid-cols-[140px_1fr] items-baseline">
-              <span className="text-[15px] text-muted">What happened</span>
+              <span className="text-[15px] text-muted">Help with</span>
               <span className="text-[16px] text-ink">{submittedData.happened}</span>
-            </div>
-            <div className="grid grid-cols-[140px_1fr] items-baseline">
-              <span className="text-[15px] text-muted">Car kind</span>
-              <span className="text-[16px] text-ink">{submittedData.carKind}</span>
-            </div>
-            <div className="grid grid-cols-[140px_1fr] items-baseline">
-              <span className="text-[15px] text-muted">When</span>
-              <span className="text-[16px] text-ink">{submittedData.when}</span>
             </div>
             <div className="grid grid-cols-[140px_1fr] items-baseline">
               <span className="text-[15px] text-muted">Name</span>
@@ -115,22 +92,7 @@ export function LemonLawForm() {
               <span className="text-[15px] text-muted">Phone</span>
               <span className="text-[16px] text-ink">{submittedData.phone}</span>
             </div>
-            {submittedData.note && (
-              <div className="grid grid-cols-[140px_1fr] items-baseline">
-                <span className="text-[15px] text-muted">Your note</span>
-                <span className="text-[16px] text-ink leading-[1.5]">{submittedData.note}</span>
-              </div>
-            )}
           </div>
-        </div>
-
-        <div className="border-t border-divider pt-8">
-          <h4 className="text-[16px] font-semibold text-ink mb-4">Hurt badly or it's urgent? Call instead.</h4>
-          <a href="tel:7603389712" className="inline-block">
-            <Button variant="secondary" size="lg" className="h-[52px] px-8 bg-white text-ink border-chip-border hover:bg-tint">
-              Call (760) 338-9712 now
-            </Button>
-          </a>
         </div>
       </div>
     );
@@ -147,62 +109,22 @@ export function LemonLawForm() {
           </svg>
           <div>
             <h4 className="text-[16px] font-semibold text-[#B92A2A] mb-1">There's a problem</h4>
-            <p className="text-[16px] text-[#B92A2A] underline cursor-pointer" onClick={() => document.getElementById('lemon-phone-input')?.focus()}>{error}</p>
+            <p className="text-[16px] text-[#B92A2A] underline cursor-pointer" onClick={() => document.getElementById('ref-phone-input')?.focus()}>{error}</p>
           </div>
         </div>
       )}
 
       <div>
-        <div className="text-[16px] font-semibold text-ink mb-4">What happened?</div>
+        <div className="text-[16px] font-semibold text-ink mb-4">What do you need help with?</div>
         <div className="flex flex-wrap gap-3">
-          {happenedOptions.map((opt) => (
-            <button 
+          {chipOptions.map((opt) => (
+            <button
               key={opt}
               type="button"
-              onClick={() => setHappened(opt)}
+              onClick={() => setSelectedChip(opt)}
               className={`px-5 py-2.5 rounded-lg border text-[16px] transition-colors ${
-                opt === happened 
-                  ? 'bg-rk-green border-rk-green text-white font-semibold' 
-                  : 'bg-white border-chip-border text-ink hover:bg-tint font-medium'
-              }`}
-            >
-              {opt}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div>
-        <div className="text-[16px] font-semibold text-ink mb-4">What kind of car?</div>
-        <div className="flex flex-wrap gap-3">
-          {carKindOptions.map((opt) => (
-            <button 
-              key={opt}
-              type="button"
-              onClick={() => setCarKind(opt)}
-              className={`px-5 py-2.5 rounded-lg border text-[16px] transition-colors ${
-                opt === carKind 
-                  ? 'bg-rk-green border-rk-green text-white font-semibold' 
-                  : 'bg-white border-chip-border text-ink hover:bg-tint font-medium'
-              }`}
-            >
-              {opt}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      <div>
-        <div className="text-[16px] font-semibold text-ink mb-4">When did the problems start?</div>
-        <div className="flex flex-wrap gap-3">
-          {whenOptions.map((opt) => (
-            <button 
-              key={opt}
-              type="button"
-              onClick={() => setWhen(opt)}
-              className={`px-5 py-2.5 rounded-lg border text-[16px] transition-colors ${
-                opt === when 
-                  ? 'bg-rk-green border-rk-green text-white font-semibold' 
+                opt === selectedChip
+                  ? 'bg-rk-green border-rk-green text-white font-semibold'
                   : 'bg-white border-chip-border text-ink hover:bg-tint font-medium'
               }`}
             >
@@ -215,26 +137,26 @@ export function LemonLawForm() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div>
           <label className="block text-[16px] font-semibold text-ink mb-2">Your name</label>
-          <input 
-            type="text" 
+          <input
+            type="text"
             value={name}
             onChange={(e) => setName(e.target.value)}
-            placeholder="First and last name"
+            placeholder="Maria Lopez"
             required
             className="w-full border border-input-border rounded-[8px] px-4 py-3 text-[17px] text-ink focus:outline-none focus:border-rk-green focus:ring-1 focus:ring-rk-green bg-white"
           />
         </div>
         <div>
           <label className="block text-[16px] font-semibold text-ink mb-2">Phone number</label>
-          <input 
-            id="lemon-phone-input"
-            type="tel" 
+          <input
+            id="ref-phone-input"
+            type="tel"
             value={phone}
             onChange={(e) => {
               setPhone(e.target.value);
               if (error) setError(null);
             }}
-            placeholder="(760) 555-0123"
+            placeholder="(760) 555-0142"
             required
             className={`w-full border rounded-[8px] px-4 py-3 text-[17px] text-ink focus:outline-none focus:ring-1 bg-white transition-colors ${
               error ? 'border-[#B92A2A] bg-[#FFF8F6] focus:border-[#B92A2A] focus:ring-[#B92A2A]' : 'border-input-border focus:border-rk-green focus:ring-rk-green'
@@ -253,18 +175,7 @@ export function LemonLawForm() {
         </div>
       </div>
 
-      <div>
-        <label className="block text-[16px] font-semibold text-ink mb-2">Anything else? (optional)</label>
-        <textarea 
-          rows={3}
-          value={note}
-          onChange={(e) => setNote(e.target.value)}
-          placeholder="Year, make and model, and what keeps going wrong"
-          className="w-full border border-input-border rounded-[8px] px-4 py-3 text-[17px] text-ink focus:outline-none focus:border-rk-green focus:ring-1 focus:ring-rk-green bg-white resize-none"
-        />
-      </div>
-
-      <Button size="lg" type="submit" disabled={isSending} className="w-full lg:w-max lg:px-10 justify-center h-[52px]">
+      <Button size="lg" type="submit" disabled={isSending} className="w-full sm:w-auto justify-center h-[52px]">
         {isSending ? (
           <span className="flex items-center gap-2">
             <svg className="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -274,13 +185,21 @@ export function LemonLawForm() {
             Sending
           </span>
         ) : (
-          "Request my free review"
+          "Request a referral"
         )}
       </Button>
 
       <p className="text-[13.5px] leading-[1.5] text-muted max-w-2xl">
-        By sending this, you agree we can call or text you about your case. Message and data rates may apply. This form doesn&apos;t make us your lawyers yet.
+        By sending this, you agree we can call or text you about your referral. Message and data rates may apply. Sending this form doesn&apos;t make us your lawyers.
       </p>
+
+      <div className="bg-tint rounded-lg p-6 border border-divider">
+        <h4 className="text-[17px] font-semibold text-ink mb-2">Referrals are free to you</h4>
+        <p className="text-[17px] text-body-text leading-[1.5]">
+          You never pay us for a referral. If there&apos;s any fee arrangement between our firm and the firm we refer you to, we&apos;ll tell you about it in writing.
+        </p>
+        <p className="text-[14px] text-muted mt-2">[Confirm with John: fee arrangement wording]</p>
+      </div>
     </form>
   );
 }
