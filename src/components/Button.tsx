@@ -7,7 +7,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 export function Button({ variant = 'primary', size = 'md', children, className = '', ...props }: ButtonProps) {
-  const baseStyles = 'inline-flex items-center justify-center font-semibold rounded-sm transition-colors';
+  const baseStyles = 'inline-flex items-center justify-center font-semibold rounded-sm transition-all duration-200 active:scale-[0.98]';
   
   const variants = {
     primary: 'bg-rk-green text-white hover:bg-rk-green/90',

@@ -1,3 +1,4 @@
+import { NewsletterForm } from "@/components/NewsletterForm";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/Button";
@@ -86,16 +87,7 @@ export default function Newsletter() {
                 <p className="text-[17px] text-body-text leading-[1.5] mb-6">
                   Each issue answers one real question about injury, law or workers&apos; comp, plus one practical tip. Sent [Confirm frequency with John].
                 </p>
-                <form className="flex flex-col sm:flex-row gap-4 mb-4">
-                  <input
-                    type="email"
-                    placeholder="Your email address"
-                    className="flex-1 border border-input-border rounded-sm px-4 py-3.5 text-[16px] text-ink focus:outline-none focus:border-rk-green bg-white"
-                  />
-                  <Button type="submit" size="lg" className="shrink-0 justify-center h-[52px]">
-                    Subscribe
-                  </Button>
-                </form>
+                <NewsletterForm className="flex flex-col sm:flex-row gap-4 mb-4" />
                 <p className="text-[14px] text-muted">Unsubscribe any time. The newsletter is general information, not legal advice.</p>
               </div>
 
