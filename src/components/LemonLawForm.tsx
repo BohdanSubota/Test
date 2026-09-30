@@ -15,7 +15,7 @@ export function LemonLawForm() {
   
   const submitMutation = trpc.contact.submit.useMutation();
   const [isSuccess, setIsSuccess] = useState(false);
-  const [submittedData, setSubmittedData] = useState<Record<string, unknown> | null>(null);
+  const [submittedData, setSubmittedData] = useState<Record<string, string> | null>(null);
 
   const happenedOptions = [
     "Car accident", "Motorcycle", "Truck", "Uber or Lyft", "Hurt at work", 

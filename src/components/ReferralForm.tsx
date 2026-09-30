@@ -12,7 +12,7 @@ export function ReferralForm() {
   
   const submitMutation = trpc.contact.submit.useMutation();
   const [isSuccess, setIsSuccess] = useState(false);
-  const [submittedData, setSubmittedData] = useState<Record<string, unknown> | null>(null);
+  const [submittedData, setSubmittedData] = useState<Record<string, string> | null>(null);
 
   const chipOptions = [
     "Immigration", "Employment", "DUI", "Criminal defense", "Divorce",
