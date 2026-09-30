@@ -52,7 +52,7 @@ export function ReviewsCarousel() {
             </div>
           </div>
           <div className="hidden lg:flex items-center gap-4">
-            <a href="#" className="text-[16px] font-semibold text-rk-green hover:underline">Read all reviews on Google</a>
+            <a href="https://google.com/search?q=Romero+Kucerkova+Law" target="_blank" className="text-[16px] font-semibold text-rk-green hover:underline">Read all reviews on Google</a>
             <div className="flex gap-2">
               <button onClick={scrollLeft} className="w-10 h-10 rounded-full border border-chip-border flex items-center justify-center text-ink hover:bg-tint transition-colors">&lsaquo;</button>
               <button onClick={scrollRight} className="w-10 h-10 rounded-full border border-chip-border flex items-center justify-center text-ink hover:bg-tint transition-colors">&rsaquo;</button>
@@ -67,7 +67,7 @@ export function ReviewsCarousel() {
           <ReviewCard 
             name="Giovanni J."
             time="a year ago"
-            text="Many other lawyers rejected my case, but they didn't. On the contrary, they accepted it and fought strategically for me. They resolved my car accident case without me having to lift a finger and secured me a very good compensation."
+            text="Many other lawyers rejected my case, but they didn&apos;t. On the contrary, they accepted it and fought strategically for me. They resolved my car accident case without me having to lift a finger and secured me a very good compensation."
             chips={["Car accident"]}
             translated={true}
             avatarInitial="G"
@@ -112,7 +112,7 @@ export function ReviewsCarousel() {
             {[1,2,3,4,5].map(i => <img key={i} src="/icons/icon-star.svg" alt="Star" className="w-[18px] h-[18px]" />)}
           </div>
           <p className="text-[17px] text-body-text leading-[1.5] mb-6">
-            &ldquo;Many other lawyers rejected my case, but they didn't. On the contrary, they accepted it and fought strategically for me. They resolved my car accident case without me having to lift a finger and secured me a very good compensation.&rdquo;
+            &ldquo;Many other lawyers rejected my case, but they didn&apos;t. On the contrary, they accepted it and fought strategically for me. They resolved my car accident case without me having to lift a finger and secured me a very good compensation.&rdquo;
           </p>
           <div className="text-[15px] font-medium text-ink mb-0.5">Giovanni J.</div>
           <div className="text-[15px] text-body-text">Google review, translated by Google</div>
@@ -140,7 +140,7 @@ export function ReviewsCarousel() {
           <div className="text-[15px] text-body-text">Google review</div>
         </div>
         
-        <a href="#" className="text-[16px] font-semibold text-rk-green hover:underline mt-2 inline-block">Read all 49 reviews on Google</a>
+        <a href="https://google.com/search?q=Romero+Kucerkova+Law" target="_blank" className="text-[16px] font-semibold text-rk-green hover:underline mt-2 inline-block">Read all 49 reviews on Google</a>
       </div>
     </section>
   );

@@ -78,7 +78,7 @@ export default function Contact() {
                 <div>
                   <span className="text-[15px] font-semibold text-ink block mb-1">Address</span>
                   <span className="text-[17px] text-body-text block mb-2">16888 Nisqualli Rd., Suite 200-13<br />Victorville, CA 92395</span>
-                  <a href="#" className="text-[16px] font-semibold text-rk-green hover:underline">Get directions</a>
+                  <a href="https://maps.google.com/?q=16888+Nisqualli+Rd,+Victorville,+CA+92395" target="_blank" className="text-[16px] font-semibold text-rk-green hover:underline">Get directions</a>
                 </div>
                 <div>
                   <span className="text-[15px] font-semibold text-ink block mb-1">Hours</span>

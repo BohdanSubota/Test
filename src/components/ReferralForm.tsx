@@ -12,7 +12,7 @@ export function ReferralForm() {
   
   const submitMutation = trpc.contact.submit.useMutation();
   const [isSuccess, setIsSuccess] = useState(false);
-  const [submittedData, setSubmittedData] = useState<any>(null);
+  const [submittedData, setSubmittedData] = useState<Record<string, unknown> | null>(null);
 
   const chipOptions = [
     "Immigration", "Employment", "DUI", "Criminal defense", "Divorce",
@@ -70,10 +70,10 @@ export function ReferralForm() {
         </div>
         
         <h2 className="text-[36px] lg:text-[44px] font-semibold text-ink leading-[1.1] tracking-[-0.01em] mb-4">
-          Thanks, {firstName}. We've got your request.
+          Thanks, {firstName}. We&apos;ve got your request.
         </h2>
         <p className="text-[18px] lg:text-[20px] text-body-text leading-[1.5] mb-10">
-          We'll call you at {submittedData.phone} to talk through what you need. We'll suggest a firm we trust.
+          We&apos;ll call you at {submittedData.phone} to talk through what you need. We&apos;ll suggest a firm we trust.
         </p>
 
         <div className="bg-tint rounded-lg p-6 lg:p-10 mb-10 border border-transparent">
@@ -108,7 +108,7 @@ export function ReferralForm() {
             <line x1="12" y1="16" x2="12.01" y2="16"></line>
           </svg>
           <div>
-            <h4 className="text-[16px] font-semibold text-[#B92A2A] mb-1">There's a problem</h4>
+            <h4 className="text-[16px] font-semibold text-[#B92A2A] mb-1">There&apos;s a problem</h4>
             <p className="text-[16px] text-[#B92A2A] underline cursor-pointer" onClick={() => document.getElementById('ref-phone-input')?.focus()}>{error}</p>
           </div>
         </div>

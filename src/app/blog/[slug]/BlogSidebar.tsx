@@ -61,7 +61,7 @@ export function BlogSidebar() {
             </div>
             <h4 className="text-[20px] font-semibold text-ink mb-2">Request sent</h4>
             <p className="text-[16px] text-body-text leading-[1.5]">
-              Thanks, we've received your request. We'll call you shortly at {phone}.
+              Thanks, we&apos;ve received your request. We&apos;ll call you shortly at {phone}.
             </p>
           </div>
         ) : (

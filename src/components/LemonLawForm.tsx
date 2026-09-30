@@ -15,7 +15,7 @@ export function LemonLawForm() {
   
   const submitMutation = trpc.contact.submit.useMutation();
   const [isSuccess, setIsSuccess] = useState(false);
-  const [submittedData, setSubmittedData] = useState<any>(null);
+  const [submittedData, setSubmittedData] = useState<Record<string, unknown> | null>(null);
 
   const happenedOptions = [
     "Car accident", "Motorcycle", "Truck", "Uber or Lyft", "Hurt at work", 
@@ -85,10 +85,10 @@ export function LemonLawForm() {
         </div>
         
         <h2 className="text-[36px] lg:text-[44px] font-semibold text-ink leading-[1.1] tracking-[-0.01em] mb-4">
-          Thanks, {firstName}. We've got your case.
+          Thanks, {firstName}. We&apos;ve got your case.
         </h2>
         <p className="text-[18px] lg:text-[20px] text-body-text leading-[1.5] mb-10">
-          We'll call you at {submittedData.phone} to talk through what happened. The review is free, and there's nothing to sign on this call.
+          We&apos;ll call you at {submittedData.phone} to talk through what happened. The review is free, and there&apos;s nothing to sign on this call.
         </p>
 
         <div className="bg-tint rounded-lg p-6 lg:p-10 mb-10 border border-transparent">
@@ -125,7 +125,7 @@ export function LemonLawForm() {
         </div>
 
         <div className="border-t border-divider pt-8">
-          <h4 className="text-[16px] font-semibold text-ink mb-4">Hurt badly or it's urgent? Call instead.</h4>
+          <h4 className="text-[16px] font-semibold text-ink mb-4">Hurt badly or it&apos;s urgent? Call instead.</h4>
           <a href="tel:7603389712" className="inline-block">
             <Button variant="secondary" size="lg" className="h-[52px] px-8 bg-white text-ink border-chip-border hover:bg-tint">
               Call (760) 338-9712 now
@@ -146,7 +146,7 @@ export function LemonLawForm() {
             <line x1="12" y1="16" x2="12.01" y2="16"></line>
           </svg>
           <div>
-            <h4 className="text-[16px] font-semibold text-[#B92A2A] mb-1">There's a problem</h4>
+            <h4 className="text-[16px] font-semibold text-[#B92A2A] mb-1">There&apos;s a problem</h4>
             <p className="text-[16px] text-[#B92A2A] underline cursor-pointer" onClick={() => document.getElementById('lemon-phone-input')?.focus()}>{error}</p>
           </div>
         </div>

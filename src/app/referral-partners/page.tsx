@@ -129,7 +129,7 @@ export default function ReferralPartners() {
             ))}
           </div>
 
-          <a href="#" className="text-[16px] font-semibold text-rk-green hover:underline">
+          <a href="https://maps.google.com/?q=16888+Nisqualli+Rd,+Victorville,+CA+92395" target="_blank" className="text-[16px] font-semibold text-rk-green hover:underline">
             Not sure which one fits? Ask us and we&apos;ll point you in the right direction.
           </a>
         </section>

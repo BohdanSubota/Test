@@ -34,11 +34,12 @@ export type BlogPostEntry = {
   content: Document | null;
 };
 
-function formatPost(item: any): BlogPostEntry {
-  const fields = item.fields;
+function formatPost(item: unknown): BlogPostEntry {
+  const entry = item as { fields: Record<string, unknown> };
+  const fields = entry.fields;
   
   // Format date to "September 18, 2026"
-  const formattedDate = fields.date 
+  const formattedDate = typeof fields.date === 'string'
     ? new Date(fields.date).toLocaleDateString('en-US', {
         year: 'numeric',
         month: 'long',
@@ -47,26 +48,27 @@ function formatPost(item: any): BlogPostEntry {
     : '';
 
   // Extract image URL
-  const imageSrc = fields.image?.fields?.file?.url 
-    ? `https:${fields.image.fields.file.url}`
+  const imageField = fields.image as { fields?: { file?: { url?: string } } } | undefined;
+  const imageSrc = imageField?.fields?.file?.url 
+    ? `https:${imageField.fields.file.url}`
     : '/images/img-1.png'; // Fallback
 
   return {
-    title: fields.title || '',
-    slug: fields.slug || '',
-    category: fields.category || 'All posts',
-    description: fields.description || '',
+    title: (fields.title as string) || '',
+    slug: (fields.slug as string) || '',
+    category: (fields.category as string) || 'All posts',
+    description: (fields.description as string) || '',
     date: formattedDate,
-    readTime: fields.readTime || '5 min read',
+    readTime: (fields.readTime as string) || '5 min read',
     featured: !!fields.featured,
     imageSrc,
-    content: fields.content || null,
+    content: (fields.content as Document) || null,
   };
 }
 
 export async function getBlogPosts(category?: string) {
   try {
-    const query: any = {
+    const query: Record<string, unknown> = {
       content_type: 'blogPost',
       order: ['-fields.date'],
     };

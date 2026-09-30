@@ -1,4 +1,5 @@
 import { NewsletterForm } from "@/components/NewsletterForm";
+import Link from "next/link";
 import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/Button";
@@ -152,7 +153,7 @@ export default function Newsletter() {
                     </div>
 
                     {/* Read issue link */}
-                    <a href="#" className="text-[16px] font-semibold text-rk-green hover:underline whitespace-nowrap">Read issue</a>
+                    <Link href="/blog/what-to-do-after-car-accident" className="text-[16px] font-semibold text-rk-green hover:underline whitespace-nowrap">Read issue</Link>
                   </div>
                 ))}
               </div>

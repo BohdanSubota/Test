@@ -9,8 +9,13 @@ import { FaqAccordion } from "@/components/FaqAccordion";
 import { ReviewsCarousel } from "@/components/ReviewsCarousel";
 import { PostCard } from "@/components/PostCard";
 import { MobileStickyBar } from "@/components/MobileStickyBar";
+import { serverTrpc } from "@/trpc/server";
 
-export default function Home() {
+export default async function Home() {
+  const { featured, posts } = await serverTrpc.blog.getAll({ page: 1 });
+  const allPosts = featured ? [featured, ...posts] : posts;
+  const latestPosts = allPosts.slice(0, 3);
+
   return (
     <div className="min-h-screen flex flex-col bg-white pb-[84px] lg:pb-0">
       {/* Hero Wrapper */}
@@ -340,31 +345,21 @@ export default function Home() {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <PostCard 
-              imageSrc="/images/img-1.png"
-              category="Personal injury"
-              title="What to do in the first 24 hours after a car accident in California"
-              date="September 18, 2026"
-              readTime="7 min read"
-            />
-            <PostCard 
-              imageSrc="/images/img-5.png"
-              category="Lemon law"
-              title="Is my car a lemon? The 30-day rule explained"
-              date="September 15, 2026"
-              readTime="6 min read"
-            />
-            <PostCard 
-              imageSrc="/images/img-0.png"
-              category="Workers&apos; comp"
-              title="Workers&apos; comp claim denied? Here is what happens next"
-              date="September 9, 2026"
-              readTime="5 min read"
-            />
+            {latestPosts.map((post) => (
+              <Link key={post.slug} href={`/blog/${post.slug}`} className="block">
+                <PostCard 
+                  imageSrc={post.imageSrc}
+                  category={post.category}
+                  title={post.title}
+                  date={post.date}
+                  readTime={post.readTime}
+                />
+              </Link>
+            ))}
           </div>
           
           <div className="mt-8 lg:hidden">
-            <a href="#" className="text-[16px] font-semibold text-rk-green hover:underline">See all posts</a>
+            <Link href="/blog" className="text-[16px] font-semibold text-rk-green hover:underline">See all posts</Link>
           </div>
         </section>
 
@@ -387,7 +382,7 @@ export default function Home() {
           <p className="text-[17px] text-body-text mb-2 lg:mb-0 lg:inline">
             Need help with something else? We can point you to firms we trust for cases outside injury, lemon law and workers&apos; comp.
           </p>
-          <a href="#" className="block lg:inline text-rk-green font-semibold hover:underline mt-2 lg:mt-0 lg:ml-2">See our referral partners</a>
+          <Link href="/blog" className="block lg:inline text-rk-green font-semibold hover:underline mt-2 lg:mt-0 lg:ml-2">See our referral partners</Link>
         </section>
 
         {/* CTA Band */}

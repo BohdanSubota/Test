@@ -73,7 +73,7 @@ export default async function BlogPost({
 
                 <h2 className="text-[24px] lg:text-[28px] font-semibold text-ink mt-12">Hurt in a crash? Ask us first.</h2>
                 <p className="text-[17px] text-body-text leading-[1.7] mb-6">
-                  Tell us what happened and we'll call you back. No win, no fee.
+                  Tell us what happened and we&apos;ll call you back. No win, no fee.
                 </p>
                 <Link href="/contact" className="block">
                   <Button size="lg" className="justify-center h-[52px]">Request my free review</Button>
@@ -95,7 +95,7 @@ export default async function BlogPost({
         {/* Related posts */}
         <section className="px-4 lg:px-11 py-10 lg:py-16 max-w-[1396px] mx-auto border-t border-divider">
           <h2 className="text-[30px] lg:text-[36px] font-semibold text-ink mb-4">Keep reading</h2>
-          <p className="text-[18px] text-body-text mb-10">More plain answers about injuries, lemon cars and workers' comp in California.</p>
+          <p className="text-[18px] text-body-text mb-10">More plain answers about injuries, lemon cars and workers&apos; comp in California.</p>
 
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_1fr_300px] gap-8">
             {relatedPosts.map(p => (
@@ -131,7 +131,7 @@ export default async function BlogPost({
             <div className="max-w-xl">
               <h2 className="text-[28px] lg:text-[32px] font-semibold text-ink mb-3 lg:mb-4">Know your rights, in plain language</h2>
               <p className="text-[17px] lg:text-[18px] text-body-text">
-                Short updates on California injury, lemon law and workers' comp. Unsubscribe anytime.
+                Short updates on California injury, lemon law and workers&apos; comp. Unsubscribe anytime.
               </p>
             </div>
             <NewsletterForm className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto" />

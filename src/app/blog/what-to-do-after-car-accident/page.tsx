@@ -5,6 +5,7 @@ import { Footer } from "@/components/Footer";
 import { Button } from "@/components/Button";
 import { PostCard } from "@/components/PostCard";
 import { MobileStickyBar } from "@/components/MobileStickyBar";
+import Link from "next/link";
 
 export default function BlogPost() {
   return (
@@ -19,7 +20,7 @@ export default function BlogPost() {
             <div className="lg:col-span-8">
               {/* Breadcrumbs */}
               <div className="text-[14px] font-medium mb-4 lg:mb-6 flex items-center gap-2">
-                <a href="/blog" className="text-rk-green hover:underline">Blog</a>
+                <Link href="/blog" className="text-rk-green hover:underline">Blog</Link>
                 <span className="text-muted">/</span>
                 <span className="text-muted">Personal injury</span>
               </div>
@@ -123,7 +124,7 @@ export default function BlogPost() {
                 <div className="bg-tint rounded-[16px] p-6 lg:p-8 mb-10 border border-divider">
                   <h4 className="text-[20px] font-semibold text-ink mb-2">Hurt in a crash? Ask us first.</h4>
                   <p className="text-[16px] mb-6">Tell us what happened and we&apos;ll call you back. No win, no fee.</p>
-                  <Button variant="primary" className="h-[48px] px-6">Request my free review</Button>
+                  <Link href="/contact" className="inline-block"><Button variant="primary" className="h-[48px] px-6">Request my free review</Button></Link>
                 </div>
 
                 <hr className="border-divider mb-6" />
@@ -245,25 +246,25 @@ export default function BlogPost() {
                 <ul className="space-y-6 mb-8">
                   <li>
                     <div className="text-[13px] font-semibold text-rk-green mb-1">Workers&apos; comp</div>
-                    <a href="#" className="text-[16px] font-medium text-ink hover:text-rk-green transition-colors leading-[1.3] block">
+                    <Link href="/blog" className="text-[16px] font-medium text-ink hover:text-rk-green transition-colors leading-[1.3] block">
                       Workers&apos; comp claim denied? Here is what happens next
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <div className="text-[13px] font-semibold text-rk-green mb-1">Personal injury</div>
-                    <a href="#" className="text-[16px] font-medium text-ink hover:text-rk-green transition-colors leading-[1.3] block">
+                    <Link href="/blog" className="text-[16px] font-medium text-ink hover:text-rk-green transition-colors leading-[1.3] block">
                       Dog bite injuries in California: strict liability in plain English
-                    </a>
+                    </Link>
                   </li>
                   <li>
                     <div className="text-[13px] font-semibold text-rk-green mb-1">Lemon law</div>
-                    <a href="#" className="text-[16px] font-medium text-ink hover:text-rk-green transition-colors leading-[1.3] block">
+                    <Link href="/blog" className="text-[16px] font-medium text-ink hover:text-rk-green transition-colors leading-[1.3] block">
                       Used car lemon law: when a used car qualifies
-                    </a>
+                    </Link>
                   </li>
                 </ul>
                 <div className="mt-auto">
-                  <Button variant="secondary" className="bg-white border-chip-border h-[44px]">See all posts</Button>
+                  <Link href="/blog" className="block w-full"><Button variant="secondary" className="bg-white border-chip-border h-[44px] w-full">See all posts</Button></Link>
                 </div>
               </div>
             </div>

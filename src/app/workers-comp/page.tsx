@@ -156,9 +156,11 @@ export default function WorkersComp() {
                   <img src="/icons/icon-phone.svg" alt="Phone" className="w-5 h-5 mr-2 hidden sm:block brightness-0 invert" />
                   Call (760) 338-9712
                 </Button></a>
-                <Button variant="secondary" size="lg" className="justify-center h-[52px] bg-white border-chip-border text-ink">
-                  Start your free review
-                </Button>
+                <Link href="#review" className="flex-1 sm:flex-none">
+                  <Button variant="secondary" size="lg" className="w-full justify-center h-[52px] bg-white border-chip-border text-ink">
+                    Start your free review
+                  </Button>
+                </Link>
               </div>
             </div>
             <img src="/images/workers-denial-v2.png" alt="A denial letter on a desk" className="w-full rounded-[16px] object-cover aspect-square order-1 lg:order-2" />

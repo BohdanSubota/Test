@@ -206,7 +206,7 @@ export default function About() {
                   <span className="text-[17px] text-body-text">English and Armenian</span>
                 </div>
               </div>
-              <a href="#" className="text-[16px] font-semibold text-rk-green hover:underline mt-6 inline-block">Get directions in Google Maps</a>
+              <a href="https://maps.google.com/?q=16888+Nisqualli+Rd,+Victorville,+CA+92395" target="_blank" className="text-[16px] font-semibold text-rk-green hover:underline mt-6 inline-block">Get directions in Google Maps</a>
             </div>
           </div>
         </section>

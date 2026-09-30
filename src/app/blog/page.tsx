@@ -15,7 +15,7 @@ export default async function Blog({
   const currentPage = pageParam ? parseInt(pageParam) : 1;
   const category = rawCategory ? decodeURIComponent(rawCategory) : undefined;
   const { featured, posts, totalPages } = await serverTrpc.blog.getAll({ category, page: currentPage });
-  const categories = ["All posts", "Personal injury", "Lemon law", "Workers' comp", "Firm news"];
+  const categories = ["All posts", "Personal injury", "Lemon law", "Workers&apos; comp", "Firm news"];
 
   const getPageLink = (pageNum: number) => {
     if (pageNum === 1) return category ? `/blog?category=${encodeURIComponent(category)}` : "/blog";
@@ -33,7 +33,7 @@ export default async function Blog({
             <div>
               <h1 className="text-[36px] lg:text-[56px] leading-[1.15] lg:leading-[1.1] font-semibold tracking-[-0.015em] text-ink mb-4">Blog</h1>
               <p className="text-[18px] lg:text-[20px] leading-[1.5] text-body-text mb-8">
-                Plain answers about injuries, lemon cars and workers' comp in California. Written by our team in Victorville for people who want to know where they stand.
+                Plain answers about injuries, lemon cars and workers&apos; comp in California. Written by our team in Victorville for people who want to know where they stand.
               </p>
 
               {/* Category chips */}
@@ -166,7 +166,7 @@ export default async function Blog({
             <div className="max-w-xl">
               <h2 className="text-[28px] lg:text-[32px] font-semibold text-ink mb-3 lg:mb-4">Know your rights, in plain language</h2>
               <p className="text-[17px] lg:text-[18px] text-body-text">
-                Short updates on California injury, lemon law and workers' comp. Unsubscribe anytime.
+                Short updates on California injury, lemon law and workers&apos; comp. Unsubscribe anytime.
               </p>
             </div>
             <NewsletterForm className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto" />
