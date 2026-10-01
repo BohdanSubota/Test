@@ -35,12 +35,12 @@ export function Header() {
         <div className="max-w-[1396px] mx-auto px-5 lg:px-11 h-[72px] lg:h-24 flex items-center justify-between">
           {/* Logo */}
           <Link href="/" className="flex items-center" onClick={() => setIsOpen(false)}>
-            <img src="/icons/logo.svg" alt="Romero Kucerkova Law" className="hidden lg:block h-12 w-auto" />
+            <img src="/icons/logo.svg" alt="Romero Kucerkova Law" className="hidden lg:block h-[34px] w-auto" />
             <img src="/icons/logo.svg" alt="Romero Kucerkova Law" className="block lg:hidden h-[30px] w-auto object-contain" />
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-8">
+          <nav className="hidden lg:flex items-center gap-10">
             {links.slice(0, 6).map(link => (
               <Link key={link.href} href={link.href} className="text-[16px] font-medium text-ink hover:text-rk-green transition-colors">{link.label}</Link>
             ))}
