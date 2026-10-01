@@ -36,7 +36,7 @@ export function Header() {
           {/* Logo */}
           <Link href="/" className="flex items-center" onClick={() => setIsOpen(false)}>
             <img src="/icons/logo.svg" alt="Romero Kucerkova Law" className="hidden lg:block h-12 w-auto" />
-            <img src="/icons/logo-small.svg" alt="Romero Kucerkova Law" className="block lg:hidden h-10 w-auto" />
+            <img src="/icons/logo.svg" alt="Romero Kucerkova Law" className="block lg:hidden h-[30px] w-auto object-contain" />
           </Link>
 
           {/* Desktop Nav */}
@@ -79,7 +79,7 @@ export function Header() {
           {/* Menu Header (same height and layout as standard header) */}
           <div className="px-5 h-[72px] flex items-center justify-between border-b border-divider shrink-0">
             <Link href="/" className="flex items-center" onClick={() => setIsOpen(false)}>
-              <img src="/icons/logo-small.svg" alt="Romero Kucerkova Law" className="h-10 w-auto" />
+              <img src="/icons/logo.svg" alt="Romero Kucerkova Law" className="h-[30px] w-auto object-contain" />
             </Link>
             
             <div className="flex items-center gap-3">

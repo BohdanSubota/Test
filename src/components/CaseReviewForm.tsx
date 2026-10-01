@@ -20,10 +20,14 @@ export function CaseReviewForm({ variant = "example", compactAction = false }: C
   const submitMutation = trpc.contact.submit.useMutation();
   const [isSuccess, setIsSuccess] = useState(false);
   const [submittedData, setSubmittedData] = useState<Record<string, string> | null>(null);
+  const [showNote, setShowNote] = useState(false);
 
   const happenedOptions = [
     "Car accident", "Motorcycle", "Truck", "Uber or Lyft", "Hurt at work", 
     "Pedestrian", "Dog bite", "Slip and fall", "Lemon car", "Something else"
+  ];
+  const happenedOptionsMobile = [
+    "Car accident", "Lemon car", "Hurt at work", "Truck or rideshare", "Slip and fall", "Something else"
   ];
   
   const whenOptions = [
@@ -162,21 +166,41 @@ export function CaseReviewForm({ variant = "example", compactAction = false }: C
       {/* What happened */}
       <div>
         <div className="text-[16px] font-semibold text-ink mb-4">What happened?</div>
-        <div className="flex flex-wrap gap-3">
-          {happenedOptions.map((opt) => (
-            <button 
-              key={opt}
-              type="button"
-              onClick={() => setHappened(opt)}
-              className={`px-5 py-2.5 rounded-lg border text-[16px] transition-colors ${
-                opt === happened 
-                  ? 'bg-rk-green border-rk-green text-white font-semibold' 
-                  : 'bg-white border-chip-border text-ink hover:bg-tint font-medium'
-              }`}
-            >
-              {opt}
-            </button>
-          ))}
+        <div>
+          {/* Mobile options */}
+          <div className="flex lg:hidden flex-wrap gap-3">
+            {happenedOptionsMobile.map((opt) => (
+              <button 
+                key={opt}
+                type="button"
+                onClick={() => setHappened(opt)}
+                className={`px-5 py-2.5 rounded-lg border text-[16px] transition-colors ${
+                  opt === happened 
+                    ? 'bg-rk-green border-rk-green text-white font-semibold' 
+                    : 'bg-white border-chip-border text-ink hover:bg-tint font-medium'
+                }`}
+              >
+                {opt}
+              </button>
+            ))}
+          </div>
+          {/* Desktop options */}
+          <div className="hidden lg:flex flex-wrap gap-3">
+            {happenedOptions.map((opt) => (
+              <button 
+                key={opt}
+                type="button"
+                onClick={() => setHappened(opt)}
+                className={`px-5 py-2.5 rounded-lg border text-[16px] transition-colors ${
+                  opt === happened 
+                    ? 'bg-rk-green border-rk-green text-white font-semibold' 
+                    : 'bg-white border-chip-border text-ink hover:bg-tint font-medium'
+                }`}
+              >
+                {opt}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 
@@ -244,7 +268,35 @@ export function CaseReviewForm({ variant = "example", compactAction = false }: C
       </div>
 
       {/* Anything else */}
-      <div>
+      <div className="lg:hidden">
+        {!showNote ? (
+          <button 
+            type="button" 
+            onClick={() => setShowNote(true)}
+            className="flex items-center gap-2 text-[16px] font-semibold text-rk-green hover:text-rk-green-hover transition-colors"
+          >
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            Add details (optional)
+          </button>
+        ) : (
+          <div>
+            <label className="block text-[16px] font-semibold text-ink mb-2">Anything else? (optional)</label>
+            <textarea 
+              rows={3}
+              defaultValue={defaultNote}
+              onChange={(e) => setNote(e.target.value)}
+              placeholder="Tell us what happened..."
+              className="w-full border border-input-border rounded-[8px] px-4 py-3 text-[17px] text-ink focus:outline-none focus:border-rk-green focus:ring-1 focus:ring-rk-green bg-white resize-none"
+              autoFocus
+            />
+          </div>
+        )}
+      </div>
+
+      <div className="hidden lg:block">
         <label className="block text-[16px] font-semibold text-ink mb-2">Anything else? (optional)</label>
         <textarea 
           rows={3}

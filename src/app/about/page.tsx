@@ -5,6 +5,7 @@ import { Button } from "@/components/Button";
 import { CaseReviewForm } from "@/components/CaseReviewForm";
 import { ContactCard } from "@/components/ContactCard";
 import { MobileStickyBar } from "@/components/MobileStickyBar";
+import { GoogleIcon } from "@/components/GoogleIcon";
 
 export default function About() {
   return (
@@ -26,7 +27,7 @@ export default function About() {
                 About Romero Kucerkova Law, your local firm in Victorville
               </h1>
               <p className="text-[18px] lg:text-[20px] leading-[1.5] text-body-text mb-6 lg:mb-8 max-w-[700px]">
-                Formerly Guardian Injury Law. Injury, lemon law and workers&apos; comp help from the same local team. No win, no fee: you pay nothing unless we win.
+                Formerly Guardian Injury Law. Lemon law, personal injury law and workers&apos; comp help from the same local team. No win, no fee: you pay nothing unless we win.
               </p>
 
               <div className="flex flex-col lg:flex-row lg:items-center gap-4 lg:gap-6 mb-8">
@@ -41,12 +42,7 @@ export default function About() {
                 {/* Google Badge */}
                 <div className="flex items-center gap-2 bg-white rounded-full h-[52px] px-5 shadow-sm border border-chip-border w-max">
                   <div className="flex items-center justify-center w-5 h-5">
-                    <svg viewBox="0 0 24 24" width="20" height="20" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-                      <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-                      <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-                      <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-                    </svg>
+                    <GoogleIcon />
                   </div>
                   <span className="text-[17px] font-bold text-ink ml-1">5.0</span>
                   <div className="flex items-center gap-0.5">
@@ -107,7 +103,7 @@ export default function About() {
               <div className="w-full max-w-[340px] h-px bg-divider mb-6" />
 
               <p className="text-[15px] text-muted mb-2">State Bar of California no. [Confirm with John: bar number]</p>
-              <p className="text-[15px] text-muted">Practice areas: personal injury, lemon law, workers&apos; comp</p>
+              <p className="text-[15px] text-muted">Practice areas: lemon law, personal injury law, workers&apos; comp</p>
             </div>
             <div className="lg:pt-12">
               <p className="text-[17px] text-body-text leading-[1.5] mb-6">
@@ -160,8 +156,8 @@ export default function About() {
                 desc: "Send the form or leave a message, and someone from our team calls you back to talk it through. No automated runaround."
               },
               {
-                title: "English and Armenian",
-                desc: "Our staff speak English and Armenian, so you and your family can ask questions in the language that feels easiest."
+                title: "English, Spanish, Czech, Russian, Slovak, and Armenian",
+                desc: "Our staff speak English, Spanish, Czech, Russian, Slovak, and Armenian, so you and your family can ask questions in the language that feels easiest."
               },
               {
                 title: "One team, start to finish",
@@ -183,7 +179,7 @@ export default function About() {
               <img src="/images/contact-office.png" alt="Our office in Victorville" className="w-full rounded-[16px] object-cover aspect-[3/2]" />
             </div>
             <div>
-              <h2 className="text-[30px] lg:text-[40px] leading-[1.15] lg:leading-[46px] font-semibold text-ink mb-4">Visit our Victorville office</h2>
+              <h2 className="text-[30px] lg:text-[40px] leading-[1.15] lg:leading-[46px] font-semibold text-ink mb-4">Visit our Victorville or Pasadena office</h2>
               <p className="text-[17px] text-body-text leading-[1.5] mb-8">
                 We&apos;re a local firm, and our office is here in the High Desert. Call before you come in so the right person is there to meet you.
               </p>
@@ -191,7 +187,7 @@ export default function About() {
               <div className="flex flex-col gap-4">
                 <div className="grid grid-cols-[100px_1fr] gap-4 py-3 border-t border-divider">
                   <span className="text-[15px] font-semibold text-ink">Address</span>
-                  <span className="text-[17px] text-body-text">16888 Nisqualli Rd., Suite 200-13<br />Victorville, CA 92395</span>
+                  <span className="text-[17px] text-body-text">Victorville, CA & Pasadena, CA</span>
                 </div>
                 <div className="grid grid-cols-[100px_1fr] gap-4 py-3 border-t border-divider">
                   <span className="text-[15px] font-semibold text-ink">Phone</span>
@@ -203,7 +199,7 @@ export default function About() {
                 </div>
                 <div className="grid grid-cols-[100px_1fr] gap-4 py-3 border-t border-b border-divider">
                   <span className="text-[15px] font-semibold text-ink">We speak</span>
-                  <span className="text-[17px] text-body-text">English and Armenian</span>
+                  <span className="text-[17px] text-body-text">English, Spanish, Czech, Russian, Slovak, and Armenian</span>
                 </div>
               </div>
               <a href="https://maps.google.com/?q=16888+Nisqualli+Rd,+Victorville,+CA+92395" target="_blank" className="text-[16px] font-semibold text-rk-green hover:underline mt-6 inline-block">Get directions in Google Maps</a>
@@ -220,12 +216,7 @@ export default function About() {
             </div>
             <div className="flex items-center gap-2">
               <div className="flex items-center justify-center w-5 h-5 bg-white rounded-full shadow-sm border border-divider">
-                <svg viewBox="0 0 24 24" width="14" height="14" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
-                  <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
-                  <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/>
-                  <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
-                </svg>
+                <GoogleIcon />
               </div>
               <span className="text-[15px] font-bold text-ink">5.0</span>
               <div className="flex items-center gap-0.5">

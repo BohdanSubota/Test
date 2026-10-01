@@ -7,27 +7,36 @@ export function ContactCard() {
       </p>
       
       <div className="mb-6 lg:mb-8">
-        <a href="tel:7603389712" className="text-[20px] lg:text-[24px] font-semibold text-rk-green block mb-1">
-          (760) 338-9712
-        </a>
-        <a href="mailto:hello@rklegalcorp.com" className="text-[17px] text-rk-green">
+        <a href="mailto:hello@rklegalcorp.com" className="text-[20px] lg:text-[24px] font-semibold text-rk-green block mb-1">
           hello@rklegalcorp.com
+        </a>
+        <a href="tel:7603389712" className="text-[17px] text-rk-green block">
+          (760) 338-9712
         </a>
       </div>
 
       <hr className="border-divider my-6 lg:my-8" />
 
-      <div className="mb-6 lg:mb-8">
-        <h4 className="text-[17px] font-semibold text-ink mb-2">Office</h4>
-        <p className="text-[17px] leading-[1.5] text-body-text">
-          16888 Nisqualli Rd., Suite 200-13<br />
-          Victorville, CA 92395
-        </p>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 lg:mb-8">
+        <div>
+          <h4 className="text-[17px] font-semibold text-ink mb-2">Victorville Office</h4>
+          <p className="text-[17px] leading-[1.5] text-body-text">
+            16888 Nisqualli Rd., Suite 200-13<br />
+            Victorville, CA 92395
+          </p>
+        </div>
+        <div>
+          <h4 className="text-[17px] font-semibold text-ink mb-2">Pasadena Office</h4>
+          <p className="text-[17px] leading-[1.5] text-body-text">
+            Pasadena, CA<br />
+            (Address pending)
+          </p>
+        </div>
       </div>
 
       <div className="mb-6 lg:mb-8">
         <h4 className="text-[17px] font-semibold text-ink mb-2">We speak</h4>
-        <p className="text-[17px] leading-[1.5] text-body-text">English and Armenian</p>
+        <p className="text-[17px] leading-[1.5] text-body-text">English, Spanish, Czech, Russian, Slovak, and Armenian</p>
       </div>
 
       <hr className="border-divider my-6 lg:my-8" />

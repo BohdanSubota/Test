@@ -131,7 +131,7 @@ export default async function BlogPost({
             <div className="max-w-xl">
               <h2 className="text-[28px] lg:text-[32px] font-semibold text-ink mb-3 lg:mb-4">Know your rights, in plain language</h2>
               <p className="text-[17px] lg:text-[18px] text-body-text">
-                Short updates on California injury, lemon law and workers&apos; comp. Unsubscribe anytime.
+                Short updates on California Lemon law, personal injury law and workers&apos; comp. Unsubscribe anytime.
               </p>
             </div>
             <NewsletterForm className="flex flex-col sm:flex-row gap-4 w-full lg:w-auto" />

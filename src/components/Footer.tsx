@@ -11,7 +11,7 @@ export function Footer() {
               <img src="/icons/logo.svg" alt="Romero Kucerkova Law" className="h-10 w-auto" />
             </Link>
             <p className="text-[17px] text-body-text leading-[1.5]">
-              A local Victorville firm helping people with personal injury, lemon law and workers&apos; comp claims across Southern California.
+              A local Victorville firm helping people with lemon law, personal injury law and workers&apos; comp claims across Southern California.
             </p>
           </div>
 
@@ -41,10 +41,21 @@ export function Footer() {
           <div>
             <h3 className="text-[16px] font-semibold text-ink mb-6">Contact</h3>
             <ul className="space-y-4">
-              <li className="text-[16px] font-semibold text-ink">(760) 338-9712</li>
-              <li className="text-[16px] text-body-text">hello@rklegalcorp.com</li>
-              <li className="text-[16px] text-body-text leading-[1.4]">16888 Nisqualli Rd., Suite 200-13<br/>Victorville, CA 92395</li>
-              <li className="text-[16px] text-body-text">We speak English and Armenian</li>
+              <li>
+                <a href="mailto:hello@rklegalcorp.com" className="text-[16px] font-semibold text-rk-green hover:text-rk-green-hover transition-colors">
+                  hello@rklegalcorp.com
+                </a>
+              </li>
+              <li className="text-[16px] text-body-text">(760) 338-9712</li>
+              <li className="text-[16px] text-body-text leading-[1.4]">
+                <strong className="font-semibold text-ink">Victorville Office:</strong><br/>
+                16888 Nisqualli Rd., Suite 200-13<br/>Victorville, CA 92395
+              </li>
+              <li className="text-[16px] text-body-text leading-[1.4]">
+                <strong className="font-semibold text-ink">Pasadena Office:</strong><br/>
+                Pasadena, CA<br/>(Address pending)
+              </li>
+              <li className="text-[16px] text-body-text">We speak English, Spanish, Czech, Russian, Slovak, and Armenian</li>
             </ul>
           </div>
         </div>
