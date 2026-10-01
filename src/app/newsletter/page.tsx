@@ -4,71 +4,38 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { Button } from "@/components/Button";
 import { GoogleIcon } from "@/components/GoogleIcon";
+import { getBlogPosts } from "@/lib/contentful";
 
-const issues = [
-  {
-    month: "September 2026",
-    entries: [
-      {
-        date: "Sep 17, 2026",
-        title: "What to say when the other driver's insurer calls",
-        desc: "You don't have to give a recorded statement. What to write down first."
-      },
-      {
-        date: "Sep 3, 2026",
-        title: "Your car is back in the shop again. Now what?",
-        desc: "How to keep your repair orders so every visit counts toward a California lemon law claim."
-      }
-    ]
-  },
-  {
-    month: "August 2026",
-    entries: [
-      {
-        date: "Aug 20, 2026",
-        title: "Your workers' comp claim was denied. Here's what that letter means",
-        desc: "A denial isn't the final word. How to read the letter and the steps to challenge it."
-      },
-      {
-        date: "Aug 6, 2026",
-        title: "Hurt in an Uber or Lyft: whose insurance pays?",
-        desc: "Coverage depends on what the driver's app was doing at the time of the crash."
-      }
-    ]
-  },
-  {
-    month: "July 2026",
-    entries: [
-      {
-        date: "Jul 23, 2026",
-        title: "Who pays the lawyer in a lemon law case",
-        desc: "Under Civil Code 1794(d), the manufacturer pays a winning buyer's attorney fees."
-      },
-      {
-        date: "Jul 9, 2026",
-        title: "Heat illness at work can be a workplace injury",
-        desc: "Working outside in High Desert heat? What to report, and when."
-      }
-    ]
-  },
-  {
-    month: "June 2026",
-    entries: [
-      {
-        date: "Jun 25, 2026",
-        title: "The first hour after a crash",
-        desc: "Photos, witness names, a police report and a doctor visit. A glovebox checklist."
-      },
-      {
-        date: "Jun 11, 2026",
-        title: "Dog bites in California: the basics",
-        desc: "Why dog bite cases work differently here, and what to do first if you or your child was bitten."
-      }
-    ]
-  }
-];
 
-export default function Newsletter() {
+
+export default async function Newsletter() {
+  const allPosts = await getBlogPosts();
+  
+  // Group posts by month and year
+  const groupedIssues = allPosts.reduce((acc, post) => {
+    const dateParts = post.date.split(' ');
+    const monthYear = dateParts.length >= 3 ? `${dateParts[0]} ${dateParts[2]}` : post.date;
+    const shortDate = dateParts.length >= 3 ? `${dateParts[0].substring(0, 3)} ${dateParts[1]} ${dateParts[2]}` : post.date;
+    
+    if (!acc[monthYear]) {
+      acc[monthYear] = [];
+    }
+    
+    acc[monthYear].push({
+      date: shortDate,
+      title: post.title,
+      desc: post.description,
+      slug: post.slug
+    });
+    
+    return acc;
+  }, {} as Record<string, any[]>);
+
+  const issues = Object.keys(groupedIssues).map(month => ({
+    month,
+    entries: groupedIssues[month]
+  }));
+
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <Header />
@@ -122,7 +89,7 @@ export default function Newsletter() {
         <section className="px-4 lg:px-11 py-10 lg:py-24 max-w-[1396px] mx-auto border-t border-divider">
           <h2 className="text-[30px] lg:text-[40px] leading-[1.15] lg:leading-[46px] font-semibold text-ink mb-4">Past issues</h2>
           <p className="text-[18px] lg:text-[20px] text-body-text mb-3">Every issue we&apos;ve sent, newest first. You can read any of them without signing up.</p>
-          <p className="text-[14px] text-muted mb-10 lg:mb-16">[Sample issues, replace with real archive]</p>
+          
 
           <div className="flex flex-col">
             {issues.map((group, gi) => (
@@ -149,7 +116,7 @@ export default function Newsletter() {
                     </div>
 
                     {/* Read issue link */}
-                    <Link href="/blog/what-to-do-after-car-accident" className="text-[16px] font-semibold text-rk-green hover:underline whitespace-nowrap">Read issue</Link>
+                    <Link href={`/blog/${entry.slug}`} className="text-[16px] font-semibold text-rk-green hover:underline whitespace-nowrap">Read issue</Link>
                   </div>
                 ))}
               </div>
