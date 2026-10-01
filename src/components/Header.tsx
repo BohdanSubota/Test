@@ -40,9 +40,9 @@ export function Header() {
           </Link>
 
           {/* Desktop Nav */}
-          <nav className="hidden lg:flex items-center gap-10">
+          <nav className="hidden lg:flex items-center lg:gap-4 xl:gap-[36px]">
             {links.slice(0, 6).map(link => (
-              <Link key={link.href} href={link.href} className="text-[16px] font-medium text-ink hover:text-rk-green transition-colors">{link.label}</Link>
+              <Link key={link.href} href={link.href} className="text-[14px] xl:text-[16px] font-medium text-ink hover:text-rk-green transition-colors whitespace-nowrap">{link.label}</Link>
             ))}
           </nav>
 
@@ -50,7 +50,7 @@ export function Header() {
           <div className="hidden lg:block">
             <a href="tel:7603389712">
               <Button variant="primary">
-                <span className="flex items-center gap-2">
+                <span className="flex items-center gap-2 whitespace-nowrap">
                   <img src="/icons/icon-phone.svg" alt="Phone" className="w-4 h-4 brightness-0 invert" />
                   Call (760) 338-9712
                 </span>
